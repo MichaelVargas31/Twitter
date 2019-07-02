@@ -62,8 +62,8 @@
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     //     NSDictionary *movie = self.filteredMovies[indexPath.row];
     NSLog(@"%@", tweets);
-    NSArray *tweet = self.tweetArray[indexPath.row];
-    cell.nameLabel.text = tweet[@"text"];
+    Tweet *tweet = self.tweetArray[indexPath.row];
+    cell.nameLabel.text = tweet.text;
     cell.handleLabel.text = @"@johnDoe99";
     cell.dateLabel.text = @"Today";
     
