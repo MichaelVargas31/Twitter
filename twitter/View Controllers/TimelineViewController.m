@@ -9,6 +9,7 @@
 #import "TimelineViewController.h"
 #import "APIManager.h"
 #import "Tweet.h"
+#import "User.h"
 #import "TweetCell.h"
 
 @interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -23,6 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.timelineTableView.dataSource = self;
+    self.timelineTableView.delegate = self;
     
     // Get timeline
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
@@ -39,6 +43,9 @@
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
+        
+        [self.timelineTableView reloadData];
+        
     }];
 }
 
@@ -59,20 +66,25 @@
 
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
+    
     //     NSDictionary *movie = self.filteredMovies[indexPath.row];
-    NSLog(@"%@", tweets);
     Tweet *tweet = self.tweetArray[indexPath.row];
-    cell.nameLabel.text = tweet.text;
-    cell.handleLabel.text = @"@johnDoe99";
-    cell.dateLabel.text = @"Today";
+    NSLog(@"---------------");
+    NSLog(@"---------------");
+    NSLog(@"---------------");
+    NSLog(@"%@", tweet);
+    cell.nameLabel.text = tweet.user.name;
+    cell.handleLabel.text = tweet.user.screenName;
+    cell.dateLabel.text = tweet.createdAtString;
     
     
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;
+    return self.tweetArray.count;
 }
 
 
