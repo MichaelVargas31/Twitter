@@ -16,6 +16,7 @@
 
 
 @property (strong, nonatomic) NSArray *tweetArray;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 
 @end
@@ -25,26 +26,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self getTimeline];
+
+    // for refresh control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(getTimeline) forControlEvents:UIControlEventValueChanged];
+    [self.timelineTableView addSubview:self.refreshControl];
+    [self.timelineTableView insertSubview:self.refreshControl atIndex:0];
+    
+    // for Table View
     self.timelineTableView.dataSource = self;
     self.timelineTableView.delegate = self;
     
+
+}
+
+
+- (void) getTimeline{
     // Get timeline
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             for (Tweet *tweet in tweets) {
-//                NSLog(@"%@", dictionary[@"text"]);
+                //                NSLog(@"%@", dictionary[@"text"]);
                 NSString *text = tweet.text;
                 NSLog(@"%@", text);
             }
             // self.tweetArray = [Tweet tweetsWithArray:dictionary];
             self.tweetArray = tweets;
-
+            
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
         
         [self.timelineTableView reloadData];
+        [self.refreshControl endRefreshing];
         
     }];
 }
@@ -78,6 +94,7 @@
     cell.nameLabel.text = tweet.user.name;
     cell.handleLabel.text = tweet.user.screenName;
     cell.dateLabel.text = tweet.createdAtString;
+    cell.tweetTextLabel.text = tweet.text;
     
     
     return cell;
