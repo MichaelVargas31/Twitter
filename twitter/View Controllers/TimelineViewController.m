@@ -8,8 +8,14 @@
 
 #import "TimelineViewController.h"
 #import "APIManager.h"
+#import "Tweet.h"
+#import "TweetCell.h"
 
-@interface TimelineViewController ()
+@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource>
+
+
+@property (strong, nonatomic) NSArray *tweetArray;
+
 
 @end
 
@@ -26,6 +32,9 @@
                 NSString *text = dictionary[@"text"];
                 NSLog(@"%@", text);
             }
+            // self.tweetArray = [Tweet tweetsWithArray:dictionary];
+            self.tweetArray = tweets;
+
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
@@ -46,6 +55,21 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
+    cell.nameLabel.text = @"John Doe";
+    cell.handleLabel.text = @"@johnDoe99";
+    cell.dateLabel.text = @"Today";
+    
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 20;
+}
 
 
 @end
