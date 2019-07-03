@@ -12,6 +12,9 @@
 #import "User.h"
 #import "TweetCell.h"
 #import "ComposeViewController.h"
+#import "AppDelegate.h"
+#import "LoginViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 // Step 3: viewController has a tableView as a subView
 // Step 8: tableView asks dataSource for #OfRows and cellForRowAt
@@ -20,6 +23,7 @@
 
 @property (strong, nonatomic) NSArray *tweetArray;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+- (IBAction)didTapLogout:(id)sender;
 
 
 @end
@@ -71,6 +75,8 @@
         
         // Step 7: Releoad the tableView
         [self.timelineTableView reloadData];
+//        [TweetCell refreshData];
+        
         [self.refreshControl endRefreshing];
         
     }];
@@ -94,14 +100,25 @@
     NSLog(@"---------------");
     NSLog(@"---------------");
     NSLog(@"%@", tweet);
+    
+    
+//    NSString *profilePicURLString = tweet.
+//    self.user.profilePicURL
+    
     cell.tweet = tweet;
+//    cell.tweet.user.profilePicURL
+    [cell.profilePicImageView setImageWithURL:cell.tweet.user.profilePicURL];
+
     cell.nameLabel.text = tweet.user.name;
-    cell.handleLabel.text = tweet.user.screenName;
+    // cell.handleLabel.text = tweet.user.screenName;
+    cell.handleLabel.text = [NSString stringWithFormat:@"@%@", tweet.user.screenName];
     cell.dateLabel.text = tweet.createdAtString;
     cell.tweetTextLabel.text = tweet.text;
     
     cell.likeCountLabel.text = [NSString stringWithFormat:@"%d", tweet.favoriteCount];
     cell.retweetCountLabel.text = [NSString stringWithFormat:@"%d", tweet.retweetCount];
+    
+//    [cell refreshData];       // SHOULD WORK, BUT DOESN'T.....
     
     // Step 10: cellForRows returns the instance of custom cell
     return cell;
@@ -136,5 +153,16 @@
     
     [self.timelineTableView reloadData];
 }
+
+- (IBAction)didTapLogout:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
+    
+    [[APIManager shared] logout];
+}
+
 
 @end

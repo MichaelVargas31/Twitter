@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface User : NSObject
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *screenName;
+@property (strong, nonatomic) NSURL *profilePicURL;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

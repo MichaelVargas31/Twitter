@@ -25,6 +25,9 @@
             dictionary = originalTweet;
             // why do we do this??
         }
+        
+        
+        // self.user.profilePicURL = dictionary[@"profile_image_url_https"];
         self.idStr = dictionary[@"id_str"];
         self.text = dictionary[@"text"];
         self.favoriteCount = [dictionary[@"favorite_count"] intValue];
