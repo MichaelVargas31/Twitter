@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "DateTools.h"
 
 // Step 3: viewController has a tableView as a subView
 // Step 8: tableView asks dataSource for #OfRows and cellForRowAt
@@ -112,7 +113,13 @@
     cell.nameLabel.text = tweet.user.name;
     // cell.handleLabel.text = tweet.user.screenName;
     cell.handleLabel.text = [NSString stringWithFormat:@"@%@", tweet.user.screenName];
+    
+    
     cell.dateLabel.text = tweet.createdAtString;
+    
+    
+    
+    
     cell.tweetTextLabel.text = tweet.text;
     
     cell.likeCountLabel.text = [NSString stringWithFormat:@"%d", tweet.favoriteCount];
