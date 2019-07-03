@@ -19,6 +19,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *handleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tweetTextLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *retweetCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
+
+- (IBAction)didTapRetweet:(id)sender;
+- (IBAction)didTapLike:(id)sender;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
