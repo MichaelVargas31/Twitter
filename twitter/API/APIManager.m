@@ -61,6 +61,7 @@ static NSString * const consumerSecret = @"nttOj10sFL137xJN2pTNAqowteVwlv8Ft8j2K
     return self;
 }
 
+// Make API request 
 - (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion {
     
     [self GET:@"1.1/statuses/home_timeline.json"
