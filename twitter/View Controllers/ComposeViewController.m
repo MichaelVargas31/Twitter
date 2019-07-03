@@ -7,9 +7,12 @@
 //
 
 #import "ComposeViewController.h"
+#import "APIManager.h"
+#import "Tweet.h"
 
-@interface ComposeViewController ()
-
+@interface ComposeViewController () <UITextViewDelegate>
+@property (weak, nonatomic) IBOutlet UITextView *composeTextView;
+@property (strong, nonatomic) NSString *textViewText;
 @end
 
 @implementation ComposeViewController
@@ -34,5 +37,21 @@
 }
 
 - (IBAction)sendTweetButtonClicked:(id)sender {
+    // how do I know ot use [APIManager shared]?
+    NSLog(@"%@", self.composeTextView.text);
+    [[APIManager shared] postStatusWithText:self.composeTextView.text completion:^(Tweet *composedTweet, NSError *error) {
+        if (composedTweet) {
+            NSLog(@"posted tweet? possibly...");
+            [self.delegate didTweet:composedTweet];
+            [self dismissViewControllerAnimated:true completion:nil];
+            
+        } else {
+            NSLog(@"😫 Your error coming from composeViewController: %@", error.localizedDescription);
+
+        }
+    }];
+    
+    
 }
+
 @end
