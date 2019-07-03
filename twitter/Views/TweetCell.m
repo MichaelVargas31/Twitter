@@ -7,6 +7,7 @@
 //
 
 #import "TweetCell.h"
+#import "APIManager.h"
 
 @implementation TweetCell
 
@@ -27,10 +28,26 @@
         self.tweet.retweeted = NO;
         self.tweet.retweetCount -= 1;
         [self.retweetButton setSelected:NO];
+        [[APIManager shared] unretweet:self.tweet completion:^(Tweet *newTweet, NSError *error) {
+            if(error){
+                NSLog(@"Error unretweeting tweet: %@", error.localizedDescription);
+            }
+            else{
+                NSLog(@"Successfully UNRETWEETED the following Tweet: %@", newTweet.text);
+            }
+        }];
     } else {
         self.tweet.retweeted = YES;
         self.tweet.retweetCount += 1;
         [self.retweetButton setSelected:YES];
+        [[APIManager shared] retweet:self.tweet completion:^(Tweet *newTweet, NSError *error) {
+            if(error){
+                NSLog(@"Error retweeting tweet: %@", error.localizedDescription);
+            }
+            else{
+                NSLog(@"Successfully RETWEETED the following Tweet: %@", newTweet.text);
+            }
+        }];
     }
     // make sure that you display the numbers, going to have to go to where name handle and date are set in order to set those values (where you return cell;]
     // TODO: Update cell UI
@@ -44,11 +61,34 @@
         self.tweet.favorited = NO;
         self.tweet.favoriteCount -= 1;
         [self.likeButton setSelected:NO];
+        
+        [[APIManager shared] unfavorite:self.tweet completion:^(Tweet *newTweet, NSError *error) {
+            if(error){
+                NSLog(@"Error unfavoriting tweet: %@", error.localizedDescription);
+            }
+            else{
+                NSLog(@"Successfully UNFAVORITED the following Tweet: %@", newTweet.text);
+            }
+        }];
+        
     } else {
         self.tweet.favorited = YES;
         self.tweet.favoriteCount += 1;
         [self.likeButton setSelected:YES];
+        // not actually send the favorite POST request
+        
+        [[APIManager shared] favorite:self.tweet completion:^(Tweet *newTweet, NSError *error) {
+            if(error){
+                NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
+            }
+            else{
+                NSLog(@"Successfully favorited the following Tweet: %@", newTweet.text);
+            }
+        }];
+
     }
+    
+    
     
     // make sure that you display the numbers, going to have to go to where name handle and date are set in order to set those values (where you return cell;]
     // TODO: Update cell UI
@@ -60,18 +100,6 @@
 - (void)refreshData{
     self.likeCountLabel.text = [NSString stringWithFormat:@"%d", self.tweet.favoriteCount];
     self.retweetCountLabel.text = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
-    
-//    UIImage *retweetedIcon = [UIImage imageNamed:@"retweet-icon-green"];
-//    [self.retweetButton setImage:retweetedIcon forState:UIControlStateNormal];
-//    UIImage *notRetweetedIcon = [UIImage imageNamed:@"retweet-icon"];
-//    [self.retweetButton setImage:notRetweetedIcon forState:UIControlStateSelected];
-//
-//    UIImage *notLikedIcon = [UIImage imageNamed:@"favor-icon"];
-//    [self.likeButton setImage:notLikedIcon forState:UIControlStateSelected];
-//    UIImage *likedIcon = [UIImage imageNamed:@"favor-icon-red"];
-//    [self.likeButton setImage:likedIcon forState:UIControlStateNormal];
-    
-    
 
     if (self.tweet.favorited == YES) {
         // change button color
@@ -92,14 +120,6 @@
         [self.retweetButton setImage:notRetweetedIcon forState:UIControlStateNormal];
     }
     
-    
-//    cell.nameLabel.text = tweet.user.name;
-//    cell.handleLabel.text = tweet.user.screenName;
-//    cell.dateLabel.text = tweet.createdAtString;
-//    cell.tweetTextLabel.text = tweet.text;
-//
-//    cell.likeCountLabel.text = [NSString stringWithFormat:@"%d", tweet.favoriteCount];
-//    cell.retweetCountLabel.text = [NSString stringWithFormat:@"%d", tweet.retweetCount];
     
 }
 
