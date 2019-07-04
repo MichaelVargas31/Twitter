@@ -14,6 +14,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    // initializing gesture recognizer programatically
+    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profilePicImageView addGestureRecognizer:profileTapGestureRecognizer];
+    [self.profilePicImageView setUserInteractionEnabled:YES];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -119,8 +124,11 @@
         UIImage *notRetweetedIcon = [UIImage imageNamed:@"retweet-icon"];
         [self.retweetButton setImage:notRetweetedIcon forState:UIControlStateNormal];
     }
-    
-    
+}
+
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
+    // TODO: Call method on delegate
+    [self.delegate tweetCell:self didTap:self.tweet.user];
 }
 
 

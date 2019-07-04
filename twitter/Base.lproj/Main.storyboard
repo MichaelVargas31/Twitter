@@ -93,6 +93,7 @@
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aop-vf-hag">
                                                             <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
+                                                            <gestureRecognizers/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="58" id="GRL-YQ-isY"/>
                                                                 <constraint firstAttribute="width" constant="58" id="aic-DQ-Eje"/>
@@ -201,6 +202,7 @@
                                             <outlet property="retweetButton" destination="mo9-ji-mLN" id="3zx-08-tA0"/>
                                             <outlet property="retweetCountLabel" destination="vsl-NV-OVi" id="OJd-nR-mFT"/>
                                             <outlet property="tweetTextLabel" destination="CJM-Kw-M0r" id="x5h-ML-Whs"/>
+                                            <segue destination="gCx-eD-pHT" kind="show" id="FPx-pN-Eed"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -235,6 +237,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQh-hN-GQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="TrZ-Vq-g2Q"/>
             </objects>
             <point key="canvasLocation" x="1660" y="36.206896551724142"/>
         </scene>
@@ -278,6 +281,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nJU-Dc-i5U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3511.1999999999998" y="36.206896551724142"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="aiJ-Nx-CR2">
+            <objects>
+                <tableViewController id="rbG-Of-QGt" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HPP-cZ-xUc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="q4s-jW-w6H">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="q4s-jW-w6H" id="7be-da-2fr">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="rbG-Of-QGt" id="zTC-RT-zHz"/>
+                            <outlet property="delegate" destination="rbG-Of-QGt" id="jjJ-h2-mAO"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="bP8-4r-CVA"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7hn-BK-Bui" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3511" y="771"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mU0-3C-1cS">
+            <objects>
+                <navigationController id="gCx-eD-pHT" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Qp5-Fm-9MM">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="rbG-Of-QGt" kind="relationship" relationship="rootViewController" id="aok-nL-PVL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SRg-Yc-6K6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2569" y="771"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WUT-Ke-VeR">

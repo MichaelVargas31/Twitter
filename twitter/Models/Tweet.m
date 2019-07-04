@@ -40,14 +40,7 @@
         // TODO: initialize user
         NSDictionary *user = dictionary[@"user"];
         self.user = [[User alloc] initWithDictionary:user];
-        
-        // TODO: Format and set createdAtString
-//        NSDate *timeAgoDate = [NSDate dateWithTimeIntervalSinceNow:-4];
-//        NSLog(@"Time Ago: %@", timeAgoDate.timeAgoSinceNow);
-//        NSLog(@"Time Ago: %@", timeAgoDate.shortTimeAgoSinceNow);
-//        NSDateInterval *tweetedAgoDate = [[NSDateInterval initiWithStartDate];
-//        NSDate *tweetedAgoDate = [NSDate dateWithTimeIntervalSinceNow:<#(NSTimeInterval)#>];
-//        NSLog(@"Time Ago: %@", );
+    
         
         NSString *createdAtOriginalString = dictionary[@"created_at"];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -56,7 +49,6 @@
         // Convert String to Date
         NSDate *date = [formatter dateFromString:createdAtOriginalString];
         // Configure output format
-//        NSLog(@"%@", date.timeIntervalSinceNow);
         NSDate *tweetedAgoDate = [NSDate dateWithTimeIntervalSinceNow:date.timeIntervalSinceNow];
         NSLog(@"Tweeted Time Ago: %@", tweetedAgoDate.shortTimeAgoSinceNow);
 

@@ -19,7 +19,7 @@
 
 // Step 3: viewController has a tableView as a subView
 // Step 8: tableView asks dataSource for #OfRows and cellForRowAt
-@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate>
+@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, TweetCellDelegate>
 
 
 @property (strong, nonatomic) NSArray *tweetArray;
@@ -93,7 +93,10 @@
 // Step 9: does something, returns the information
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
+    
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
+    
+    cell.delegate = self;
     
     //     NSDictionary *movie = self.filteredMovies[indexPath.row];
     Tweet *tweet = self.tweetArray[indexPath.row];
@@ -169,6 +172,15 @@
     appDelegate.window.rootViewController = loginViewController;
     
     [[APIManager shared] logout];
+}
+
+- (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
+    // TODO: Perform segue to profile view controller
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+    In prepareForSegue(), check that the id matches segue.identifier, get the user from the segue.destination and pass the user to the profile view controller.
+    
+
+
 }
 
 
