@@ -19,10 +19,10 @@
 //        self.bannerPicURL = [NSURL URLWithString:dictionary[@"profile_background_image_url"]];
         self.bannerPicURL = [NSURL URLWithString:dictionary[@"profile_banner_url"]];
         self.bio = dictionary[@"description"];
-
         self.followers = dictionary[@"followers_count"];
         self.friends = dictionary[@"friends_count"];
-        
+        self.numberOfTweets = [NSString stringWithFormat:@"%@", dictionary[@"statuses_count"]];
+        NSLog(@"status count = %lu", dictionary[@"statuses_count"]);
     }
     return self;
 }

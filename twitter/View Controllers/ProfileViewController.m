@@ -30,6 +30,7 @@
     if (self.user.bannerPicURL != nil) {
         [self.bannerImageView setImageWithURL:self.user.bannerPicURL];
     }
+    self.tweetCountLabel.text = self.user.numberOfTweets;
 //    [cell.profilePicImageView setImageWithURL:cell.tweet.user.profilePicURL];
 
 }

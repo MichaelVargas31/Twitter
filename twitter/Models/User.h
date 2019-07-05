@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *followers;
 @property (strong, nonatomic) NSString *friends;
 @property (strong, nonatomic) NSString *bio;
+@property (strong, nonatomic) NSString *numberOfTweets;
+
 
 
 
