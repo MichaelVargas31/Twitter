@@ -33,6 +33,19 @@ static NSString * const consumerSecret = @"nttOj10sFL137xJN2pTNAqowteVwlv8Ft8j2K
 }
 
 
+- (void)getFollowerInformation:(Tweet *)tweet completion:(void (^)(NSDictionary *, NSError *))completion{
+    NSString *urlString = @"1.1/followers/ids.json";
+    NSDictionary *parameters = @{@"id": tweet.idStr};
+
+    [self GET:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        NSDictionary *result = [[NSDictionary alloc] init];
+        completion(result, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
+
 // Below handles favoriting, unfavoriting, retweeting, and unretweeting POST requests
 /* Method for sending a POST request for a favorite? */
 - (void)favorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{

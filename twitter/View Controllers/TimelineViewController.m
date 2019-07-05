@@ -7,13 +7,14 @@
 //
 
 #import "TimelineViewController.h"
+#import "ComposeViewController.h"
+#import "ProfileViewController.h"
+#import "LoginViewController.h"
 #import "APIManager.h"
 #import "Tweet.h"
 #import "User.h"
 #import "TweetCell.h"
-#import "ComposeViewController.h"
 #import "AppDelegate.h"
-#import "LoginViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "DateTools.h"
 
@@ -88,11 +89,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-
 // Step 9: does something, returns the information
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    
     
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     
@@ -105,10 +103,6 @@
     NSLog(@"---------------");
     NSLog(@"%@", tweet);
     
-    
-//    NSString *profilePicURLString = tweet.
-//    self.user.profilePicURL
-    
     cell.tweet = tweet;
 //    cell.tweet.user.profilePicURL
     [cell.profilePicImageView setImageWithURL:cell.tweet.user.profilePicURL];
@@ -117,11 +111,7 @@
     // cell.handleLabel.text = tweet.user.screenName;
     cell.handleLabel.text = [NSString stringWithFormat:@"@%@", tweet.user.screenName];
     
-    
     cell.dateLabel.text = tweet.createdAtString;
-    
-    
-    
     
     cell.tweetTextLabel.text = tweet.text;
     
@@ -148,9 +138,31 @@
      
      // set the TimelineViewController as the delegate of the ComposeViewController
      UINavigationController *navigationController = [segue destinationViewController];
-     ComposeViewController *composeController = (ComposeViewController *)navigationController.topViewController;
-     composeController.delegate = self;
+     
+     if ([segue.identifier isEqualToString:@"profileSegue"]) {
+         ProfileViewController *profileController = (ProfileViewController *)navigationController.topViewController;
+         
+//         TweetCell *tappedCell = sender;
+         
+//         NSIndexPath *indexPath = [self.timelineTableView indexPathForCell:tappedCell];
+//         NSDictionary *oneTweet = self.tweetArray[indexPath.row];
+//
+//         NSLog(@"oneTweet = %@", oneTweet);
+//         NSLog(@"%@", oneTweet[@"text"]);
+//         profileController.user = oneTweet[@"user"];
+//         profileController.user = tappedCell.tweet.user;
+         profileController.user = sender;
+         NSLog(@"Here we go");
+         
 
+     }
+     else {
+         ComposeViewController *composeController = (ComposeViewController *)navigationController.topViewController;
+         composeController.delegate = self;
+     }
+//     ComposeViewController *composeController = (ComposeViewController *)navigationController.topViewController;
+//     composeController.delegate = self;
+     
  }
  
 
@@ -177,7 +189,6 @@
 - (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
     // TODO: Perform segue to profile view controller
     [self performSegueWithIdentifier:@"profileSegue" sender:user];
-    In prepareForSegue(), check that the id matches segue.identifier, get the user from the segue.destination and pass the user to the profile view controller.
     
 
 
