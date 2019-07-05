@@ -249,15 +249,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Type" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mhk-1X-T2C">
-                                <rect key="frame" x="0.0" y="88" width="375" height="245"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mhk-1X-T2C">
+                                <rect key="frame" x="0.0" y="120" width="375" height="558"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZk-A7-kiF">
+                                <rect key="frame" x="330" y="91" width="29" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mhk-1X-T2C" firstAttribute="leading" secondItem="DAU-77-7I7" secondAttribute="leading" id="Nyh-xR-HME"/>
+                            <constraint firstItem="mhk-1X-T2C" firstAttribute="trailing" secondItem="DAU-77-7I7" secondAttribute="trailing" id="UVI-mK-GvT"/>
+                            <constraint firstItem="DAU-77-7I7" firstAttribute="bottom" secondItem="mhk-1X-T2C" secondAttribute="bottom" constant="100" id="VeB-Fp-wag"/>
+                            <constraint firstItem="mZk-A7-kiF" firstAttribute="top" secondItem="DAU-77-7I7" secondAttribute="top" constant="3" id="bZy-m3-xTM"/>
+                            <constraint firstItem="DAU-77-7I7" firstAttribute="trailing" secondItem="mZk-A7-kiF" secondAttribute="trailing" constant="16" id="cbF-uH-B4m"/>
+                            <constraint firstItem="mhk-1X-T2C" firstAttribute="top" secondItem="DAU-77-7I7" secondAttribute="top" constant="32" id="gpd-8r-VJY"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="DAU-77-7I7"/>
                     </view>
                     <navigationItem key="navigationItem" id="DPE-DU-Qma">
@@ -273,8 +286,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="characterCountLabel" destination="mZk-A7-kiF" id="D9s-Nl-lhB"/>
                         <outlet property="closeComposeButton" destination="cEz-Oe-nzD" id="dc3-N5-3mn"/>
-                        <outlet property="composeTextView" destination="mhk-1X-T2C" id="TJW-CR-9hY"/>
+                        <outlet property="composeTextView" destination="mhk-1X-T2C" id="j2r-9e-VyK"/>
                         <outlet property="sendTweetButton" destination="rJJ-Br-mw2" id="x0W-yg-jkR"/>
                     </connections>
                 </viewController>

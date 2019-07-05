@@ -11,7 +11,7 @@
 #import "Tweet.h"
 
 @interface ComposeViewController () <UITextViewDelegate>
-@property (weak, nonatomic) IBOutlet UITextView *composeTextView;
+//@property (weak, nonatomic) IBOutlet UITextView *composeTextView;
 @property (strong, nonatomic) NSString *textViewText;
 @end
 
@@ -20,7 +20,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.composeTextView.delegate = self;
 }
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    // TODO: Check the proposed new text character count
+    // Allow or disallow the new text
+    
+    // Set the max character limit
+    int characterLimit = 140;
+    
+    // Construct what the new text would be if we allowed the user's latest edit
+    NSString *newText = [self.composeTextView.text stringByReplacingCharactersInRange:range withString:text];
+    
+    // TODO: Update Character Count Label
+    self.characterCountLabel.text = [NSString stringWithFormat:@"%lu", characterLimit - self.composeTextView.text.length];
+    
+    // The new text should be allowed? True/False
+    return newText.length < characterLimit;
+}
+
+
 
 /*
 #pragma mark - Navigation
