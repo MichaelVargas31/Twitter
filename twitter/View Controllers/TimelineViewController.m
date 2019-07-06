@@ -25,6 +25,7 @@
 
 @property (strong, nonatomic) NSArray *tweetArray;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (assign, nonatomic) BOOL isMoreDataLoading;
 - (IBAction)didTapLogout:(id)sender;
 
 
@@ -190,9 +191,9 @@
     // TODO: Perform segue to profile view controller
     [self performSegueWithIdentifier:@"profileSegue" sender:user];
     
-
-
 }
+
+
 
 
 @end
